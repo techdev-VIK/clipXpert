@@ -1,32 +1,26 @@
 const Header = () => {
+
     return (
-      <div className="grid grid-cols-12 gap-4 m-2 p-3 shadow-lg items-center">
-        
-        <div className="flex col-span-2 items-center">
-          <img className="h-8 mr-2" src="https://www.svgrepo.com/show/312300/hamburger-menu.svg" alt="menu" />
-          <h1 className="text-2xl font-bold text-blue-500">clipXpert</h1>
+        <div className="grid grid-flow-col m-2 p-3 shadow">
+            
+        <div className="flex col-span-1">
+            <img className="h-11" src="https://www.svgrepo.com/show/312300/hamburger-menu.svg" alt="menu"/>
+
+            <h1 className="text-2xl font-bold text-blue-500 mt-1 ">clipXpert</h1>
         </div>
-  
-        <div className="col-span-8 flex justify-center space-x-2">
-          <input
-            type="text"
-            placeholder="Search..."
-            className="p-2 border rounded-lg w-1/2 md:w-3/4"
-          />
-          <button className="bg-sky-500 hover:bg-sky-700 ...">Search</button>
+
+            <div className="col-span-10 text-center mt-1">
+            <input type="text" className="w-1/2 border border-gray-400 p-1"/>
+            <button className="border border-gray-400 p-1">Search</button>
+            </div>
+
+            <div className="col-span-1">
+            <img className="h-11" src="https://t4.ftcdn.net/jpg/02/29/75/83/240_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg" alt="user" />
+            </div>
+
         </div>
-  
-        <div className="col-span-2">
-          <img
-            className="h-10 rounded-full"
-            src="https://t4.ftcdn.net/jpg/02/29/75/83/240_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
-            alt="user"
-          />
-        </div>
-        
-      </div>
-    );
-  };
-  
-  export default Header;
-  
+    )
+}
+
+
+export default Header;
