@@ -2,24 +2,36 @@ import { Provider } from "react-redux";
 import Body from "./components/Body";
 import Header from "./components/Header";
 import store from "./utils/store";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import WatchPage from "./components/WatchPage";
+import MainContainer from "./components/MainContainer";
 
 
 const App = () =>{
 
-
+  const myRoutes = createBrowserRouter([
+    {
+      path: "/",
+      element: <Body />,
+      children:[
+        {
+          path: "/",
+          element: <MainContainer />
+        },
+        {
+          path: "watch",
+          element: <WatchPage />
+        }
+      ]
+    },
+    
+  ])
   return(
 
-    <BrowserRouter>
-      <Provider store={store}>
+    <Provider store={store}>
       <Header />
-      <Routes>
-        <Route path="/" element={<Body />}/>
-        <Route path="/watch" element={<WatchPage />}/>
-      </Routes>
+      <RouterProvider router={myRoutes} />
     </Provider>
-    </BrowserRouter>
 
   )
 }

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+
 
 
 const VideoCard = ({items}) => {
@@ -10,7 +10,6 @@ const VideoCard = ({items}) => {
 
 
         return (
-            <Link to="/watch">
             <div className="p-2 m-2 w-72 shadow lg">
                 <img alt="thumbnail" src={thumbnails.medium.url} />
                 <ul>
@@ -19,7 +18,6 @@ const VideoCard = ({items}) => {
                     <li>{statistics.viewCount} Views</li>
                 </ul>
             </div>
-            </Link>
         )
 }
 
