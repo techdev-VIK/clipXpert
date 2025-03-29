@@ -4,8 +4,7 @@ import { toggleMenu } from "../utils/appSlice";
 const Header = () => {
 
 
-
-    const dispatch = useDispatch();
+   const dispatch = useDispatch();
 
    const toggleMenuHandler = () => {
         dispatch(toggleMenu());

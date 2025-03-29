@@ -1,17 +1,15 @@
-import { Button } from "bootstrap";
+import Button from './Button';
+
+
+const list = ["All", "Gaming", "Music", "News", "Cricket", "Soccer", "Coding", "React"];
 
 const ButtonList = () => {
 
     return (
-        <div>
-            <Button name="All" />
-            <Button name="Gaming" />
-            <Button name="Music" />
-            <Button name="News" />
-            <Button name="Cricket" />
-            <Button name="Soccer" />
-            <Button name="Coding" />
-            <Button name="React" />
+        <div className='flex'>
+            {list.map((b) => (
+                <Button key={b} name={b}/>
+            ))}
         </div>
     )
 }
