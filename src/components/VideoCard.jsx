@@ -10,12 +10,12 @@ const VideoCard = ({items}) => {
 
 
         return (
-            <div className="p-2 m-2 w-72 shadow lg">
+            <div className="p-2 m-2 w-72 shadow-xl h-80">
                 <img alt="thumbnail" src={thumbnails.medium.url} />
                 <ul>
                     <li className="font-bold py-2">{title}</li>
                     <li>{channelTitle}</li>
-                    <li>{statistics.viewCount} Views</li>
+                    <li><small>{statistics.viewCount} Views · {statistics.likeCount} Likes</small></li>
                 </ul>
             </div>
         )

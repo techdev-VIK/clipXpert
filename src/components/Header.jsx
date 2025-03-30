@@ -19,7 +19,7 @@ const Header = () => {
             className="h-11 cursor-pointer" src="https://www.svgrepo.com/show/312300/hamburger-menu.svg" alt="menu"/>
 
             <a href="/">
-            <h1 className="text-2xl font-bold text-blue-500 mt-1 ">clipXpert</h1>
+            <h1 className="text-2xl ms-6 font-bold text-blue-500 mt-1 ">clipXpert</h1>
             </a>
         </div>
 
