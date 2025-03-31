@@ -21,5 +21,15 @@ const VideoCard = ({items}) => {
         )
 }
 
+export const HOCVideoCard = ({items}) => {
+    return(
+        <div className="p-1 m-1 border border-red-900">
+            <VideoCard items={items}/>
+        </div>
+    )
+}
+
+
+// HOC - Higher order component is a function in which a component is passed and some modifications are made and then the component is returned. Useful when making some changes to existing component like on youtube we have ads along with videos. The text inside ad varies a little bit so in this case HOC can be useful.
 
 export default VideoCard;
