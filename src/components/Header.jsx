@@ -1,7 +1,8 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { useEffect, useState } from "react";
 import { YOUTUBE_SEARCH_API } from "../utils/constants";
+import { cacheResults } from "../utils/searchSlice";
 
 const Header = () => {
 
@@ -11,9 +12,29 @@ const Header = () => {
 
     const [showSearch, setShowSearch] = useState(false);
 
+    const searchCache = useSelector((store) => store.search);
+
+    const dispatch = useDispatch();
+    
+    /**
+     * 
+     * searchCache = {
+     *  "iphone" : ["iphone", "iphone14", "iphone15"]
+     * }
+     * 
+     * searchQuery = iphone
+     * 
+     * then, searchCache[searchQuery] => all results on the array
+     */
+
     useEffect(() => {
         const timer = setTimeout(() => {
-            searchCall()
+            if(searchCache[searchQuery]){
+                setSearchSuggestions(searchCache[searchQuery])
+            }else{
+                searchCall()
+            }
+            
         }, 250);
 
         return () => {
@@ -28,14 +49,13 @@ const Header = () => {
 
         const response = await data.json();
 
-        console.log(response.items)
-
         setSearchSuggestions(response.items)
 
+        dispatch(cacheResults({
+            [searchQuery] : response.items
+        }))
+
     }
-
-
-   const dispatch = useDispatch();
 
    const toggleMenuHandler = () => {
         dispatch(toggleMenu());
@@ -56,23 +76,28 @@ const Header = () => {
 
             <div className="col-span-10 mt-1">
 
+            <div className="relative">
+
             <input type="text" 
             className="w-1/2 border border-gray-400 rounded-l-full px-5 py-1"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={() => setShowSearch(true)} onBlur={() => setShowSearch(false)} 
+            onFocus={() => setShowSearch(true)} 
+            onBlur={() => setShowSearch(false)} 
             />
             <button className="border border-gray-400 py-1 px-4 rounded-r-full bg-gray-100">🔍</button>
 
 
-            {searchQuery.length>0 && searchQuery.trim() !== "" && showSearch && <div className="fixed bg-white py-2 px-5 w-[32rem] shadow-lg rounded-lg">
+            { searchQuery.length>0 && searchQuery.trim() !== "" && showSearch && <div className="absolute bg-white py-2 px-2 w-[32rem] shadow-lg rounded-lg max-h-96 overflow-y-auto" >
                 <ul>
-                    {searchSuggestions.map((search) => (
-                        <li key={search.snippet.title} className="py-2 shadow-sm hover:bg-gray-100">🔍 {search.snippet.title}</li>
+                    {searchSuggestions?.map((search) => (
+                        <li key={search.snippet.title} className="py-2 shadow-sm hover:bg-gray-100 flex items-between" ><img src={search.snippet.thumbnails.default.url} alt="thumbnail" className="h-7 w-7 me-2"/> <span className="truncate w-96 block overflow-hidden whitespace-nowrap">{search.snippet.title}</span></li>
+                       
                     ))}
                 </ul>
             </div>}
                   
+            </div>
             </div>
 
             <div className="col-span-1">
