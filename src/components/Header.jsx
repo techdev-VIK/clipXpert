@@ -7,10 +7,14 @@ const Header = () => {
 
     const [searchQuery, setSearchQuery]= useState("");
 
+    const [searchSuggestions, setSearchSuggestions] = useState([]);
+
+    const [showSearch, setShowSearch] = useState(false);
+
     useEffect(() => {
         const timer = setTimeout(() => {
             searchCall()
-        }, 300);
+        }, 250);
 
         return () => {
             clearTimeout(timer);
@@ -25,6 +29,8 @@ const Header = () => {
         const response = await data.json();
 
         console.log(response.items)
+
+        setSearchSuggestions(response.items)
 
     }
 
@@ -54,19 +60,18 @@ const Header = () => {
             className="w-1/2 border border-gray-400 rounded-l-full px-5 py-1"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setShowSearch(true)} onBlur={() => setShowSearch(false)} 
             />
             <button className="border border-gray-400 py-1 px-4 rounded-r-full bg-gray-100">🔍</button>
 
 
-            <div className="fixed bg-white py-1 px-5 w-[31rem] shadow-lg rounded-lg">
+            {searchQuery.length>0 && searchQuery.trim() !== "" && showSearch && <div className="fixed bg-white py-2 px-5 w-[32rem] shadow-lg rounded-lg">
                 <ul>
-                    <li>🔍 Iphone</li>
-                    <li>🔍 Iphone Pro</li>
-                    <li>🔍 Iphone</li>
-                    <li>🔍 Iphone</li>
-                    <li>🔍 Iphone</li>
+                    {searchSuggestions.map((search) => (
+                        <li key={search.snippet.title} className="py-2 shadow-sm hover:bg-gray-100">🔍 {search.snippet.title}</li>
+                    ))}
                 </ul>
-            </div>
+            </div>}
                   
             </div>
 
