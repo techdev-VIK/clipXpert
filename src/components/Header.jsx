@@ -48,13 +48,26 @@ const Header = () => {
             </a>
         </div>
 
-            <div className="col-span-10 text-center mt-1">
+            <div className="col-span-10 mt-1">
+
             <input type="text" 
-            className="w-1/2 border border-gray-400 p-1 rounded-l-full"
+            className="w-1/2 border border-gray-400 rounded-l-full px-5 py-1"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button className="border border-gray-400 py-1 px-4 rounded-r-full bg-gray-100">🔍</button>
+
+
+            <div className="fixed bg-white py-1 px-5 w-[31rem] shadow-lg rounded-lg">
+                <ul>
+                    <li>🔍 Iphone</li>
+                    <li>🔍 Iphone Pro</li>
+                    <li>🔍 Iphone</li>
+                    <li>🔍 Iphone</li>
+                    <li>🔍 Iphone</li>
+                </ul>
+            </div>
+                  
             </div>
 
             <div className="col-span-1">
