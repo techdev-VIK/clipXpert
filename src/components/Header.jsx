@@ -34,6 +34,7 @@ const Header = () => {
             }else{
                 searchCall()
             }
+            // searchCall()
             
         }, 250);
 
@@ -45,17 +46,24 @@ const Header = () => {
 
 
     const searchCall = async() => {
+        console.log("API Call - " + searchQuery);
         const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
 
         const response = await data.json();
 
         setSearchSuggestions(response.items)
 
+        let results = response.items.map((search) => (
+            search.snippet.title
+        ))
+
+
         dispatch(cacheResults({
             [searchQuery] : response.items
         }))
 
     }
+
 
    const toggleMenuHandler = () => {
         dispatch(toggleMenu());
@@ -90,8 +98,8 @@ const Header = () => {
 
             { searchQuery.length>0 && searchQuery.trim() !== "" && showSearch && <div className="absolute bg-white py-2 px-2 w-[32rem] shadow-lg rounded-lg max-h-96 overflow-y-auto" >
                 <ul>
-                    {searchSuggestions?.map((search) => (
-                        <li key={search.snippet.title} className="py-2 shadow-sm hover:bg-gray-100 flex items-between" ><img src={search.snippet.thumbnails.default.url} alt="thumbnail" className="h-7 w-7 me-2"/> <span className="truncate w-96 block overflow-hidden whitespace-nowrap">{search.snippet.title}</span></li>
+                    {searchSuggestions?.length > 0 &&  searchSuggestions?.map((search) => (
+                        <li key={search.snippet.title} className="py-2 shadow-sm hover:bg-gray-100 flex items-between" >🔍<span className="truncate w-96 block overflow-hidden whitespace-nowrap ms-3">{search?.snippet?.title}</span></li>
                        
                     ))}
                 </ul>
