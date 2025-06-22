@@ -3,7 +3,7 @@ import { commentData } from "../utils/constants";
 
 const Comment = ({data}) => {
 
-    const {name, text, replies} = data;
+    const {name, text} = data;
 
     return (
         <div className="flex bg-gray-100 my-3">

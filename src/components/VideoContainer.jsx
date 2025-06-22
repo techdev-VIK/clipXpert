@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { YOUTUBE_VIDEOS_API } from "../utils/constants";
-import VideoCard, { HOCVideoCard } from "./VideoCard";
+import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
 
 
