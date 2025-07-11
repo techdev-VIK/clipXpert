@@ -6,7 +6,7 @@ const Sidebar = () => {
     const isMenuOpen = useSelector(store => store.app.isMenuOpen);
 
 
-    //early return pattern
+    //early return pattern used with return word
 
     if(!isMenuOpen) return null;
 
